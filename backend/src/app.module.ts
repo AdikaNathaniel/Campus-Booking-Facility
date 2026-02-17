@@ -18,6 +18,9 @@ import { SeedModule } from './seed/seed.module';
       synchronize: true,
       retryAttempts: 10,
       retryDelay: 3000,
+      ssl: process.env.DB_HOST && process.env.DB_HOST !== 'localhost' && process.env.DB_HOST !== 'db'
+        ? { rejectUnauthorized: false }
+        : false,
     }),
     FacilitiesModule,
     UsersModule,

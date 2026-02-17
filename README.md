@@ -512,4 +512,3 @@ A complete Postman collection is included in the project root:
 ## 📄 License
 
 This project was developed as a personal project demonstrating the **MVC architectural pattern** in mobile application development.
-
