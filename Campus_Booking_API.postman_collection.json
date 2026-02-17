@@ -1,0 +1,508 @@
+{
+	"info": {
+		"_postman_id": "campus-booking-facility-api",
+		"name": "Campus Booking Facility API",
+		"description": "Full CRUD API tests for Facilities, Users, and Bookings on the University of Ghana campus.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000"
+		}
+	],
+	"item": [
+		{
+			"name": "Facilities",
+			"item": [
+				{
+					"name": "Create Facility - Balme Library",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Balme Library\",\n    \"location\": \"Main Campus, Near Great Hall\",\n    \"capacity\": 600\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/facilities",
+							"host": ["{{baseUrl}}"],
+							"path": ["facilities"]
+						}
+					}
+				},
+				{
+					"name": "Create Facility - JQB Auditorium",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"JQB Auditorium\",\n    \"location\": \"Department of Computer Science, JQB Building\",\n    \"capacity\": 250\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/facilities",
+							"host": ["{{baseUrl}}"],
+							"path": ["facilities"]
+						}
+					}
+				},
+				{
+					"name": "Create Facility - UGCS Computer Lab",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"UGCS Computer Lab\",\n    \"location\": \"Department of Computer Science, Ground Floor\",\n    \"capacity\": 80\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/facilities",
+							"host": ["{{baseUrl}}"],
+							"path": ["facilities"]
+						}
+					}
+				},
+				{
+					"name": "Create Facility - Great Hall",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Great Hall\",\n    \"location\": \"Main Campus, University Avenue\",\n    \"capacity\": 1500\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/facilities",
+							"host": ["{{baseUrl}}"],
+							"path": ["facilities"]
+						}
+					}
+				},
+				{
+					"name": "Create Facility - New N Block Lecture Hall",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"New N Block Lecture Hall\",\n    \"location\": \"Science Campus, N Block\",\n    \"capacity\": 400\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/facilities",
+							"host": ["{{baseUrl}}"],
+							"path": ["facilities"]
+						}
+					}
+				},
+				{
+					"name": "Get All Facilities",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{baseUrl}}/facilities",
+							"host": ["{{baseUrl}}"],
+							"path": ["facilities"]
+						}
+					}
+				},
+				{
+					"name": "Get Facility by ID",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{baseUrl}}/facilities/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["facilities", "1"]
+						}
+					}
+				},
+				{
+					"name": "Update Facility (Change Capacity)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Balme Library - Main Wing\",\n    \"location\": \"Main Campus, Near Great Hall\",\n    \"capacity\": 750\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/facilities/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["facilities", "1"]
+						}
+					}
+				},
+				{
+					"name": "Delete Facility",
+					"request": {
+						"method": "DELETE",
+						"url": {
+							"raw": "{{baseUrl}}/facilities/5",
+							"host": ["{{baseUrl}}"],
+							"path": ["facilities", "5"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Create User - Nathaniel Adika (Admin)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Nathaniel Adika\",\n    \"email\": \"nathaniel.adika@ug.edu.gh\",\n    \"role\": \"admin\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": ["{{baseUrl}}"],
+							"path": ["users"]
+						}
+					}
+				},
+				{
+					"name": "Create User - Emmanuel Adika (Student)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Emmanuel Adika\",\n    \"email\": \"emmanuel.adika@st.ug.edu.gh\",\n    \"role\": \"student\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": ["{{baseUrl}}"],
+							"path": ["users"]
+						}
+					}
+				},
+				{
+					"name": "Create User - Grace Adika (Faculty)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Grace Adika\",\n    \"email\": \"grace.adika@ug.edu.gh\",\n    \"role\": \"faculty\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": ["{{baseUrl}}"],
+							"path": ["users"]
+						}
+					}
+				},
+				{
+					"name": "Create User - Daniel Adika (Student)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Daniel Adika\",\n    \"email\": \"daniel.adika@st.ug.edu.gh\",\n    \"role\": \"student\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": ["{{baseUrl}}"],
+							"path": ["users"]
+						}
+					}
+				},
+				{
+					"name": "Create User - Priscilla Adika (Faculty)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Priscilla Adika\",\n    \"email\": \"priscilla.adika@ug.edu.gh\",\n    \"role\": \"faculty\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": ["{{baseUrl}}"],
+							"path": ["users"]
+						}
+					}
+				},
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": ["{{baseUrl}}"],
+							"path": ["users"]
+						}
+					}
+				},
+				{
+					"name": "Get User by ID (Nathaniel Adika)",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{baseUrl}}/users/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["users", "1"]
+						}
+					}
+				},
+				{
+					"name": "Update User - Nathaniel Adika (Promote to superadmin)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Nathaniel Adika\",\n    \"email\": \"nathaniel.adika@ug.edu.gh\",\n    \"role\": \"superadmin\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["users", "1"]
+						}
+					}
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"url": {
+							"raw": "{{baseUrl}}/users/5",
+							"host": ["{{baseUrl}}"],
+							"path": ["users", "5"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Bookings",
+			"item": [
+				{
+					"name": "Create Booking - Nathaniel books Balme Library",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"facilityId\": 1,\n    \"userId\": 1,\n    \"date\": \"2026-03-15\",\n    \"startTime\": \"09:00\",\n    \"endTime\": \"12:00\",\n    \"status\": \"confirmed\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/bookings",
+							"host": ["{{baseUrl}}"],
+							"path": ["bookings"]
+						}
+					}
+				},
+				{
+					"name": "Create Booking - Emmanuel books JQB Auditorium",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"facilityId\": 2,\n    \"userId\": 2,\n    \"date\": \"2026-03-16\",\n    \"startTime\": \"14:00\",\n    \"endTime\": \"16:00\",\n    \"status\": \"confirmed\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/bookings",
+							"host": ["{{baseUrl}}"],
+							"path": ["bookings"]
+						}
+					}
+				},
+				{
+					"name": "Create Booking - Grace books UGCS Computer Lab",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"facilityId\": 3,\n    \"userId\": 3,\n    \"date\": \"2026-03-17\",\n    \"startTime\": \"08:00\",\n    \"endTime\": \"10:00\",\n    \"status\": \"pending\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/bookings",
+							"host": ["{{baseUrl}}"],
+							"path": ["bookings"]
+						}
+					}
+				},
+				{
+					"name": "Create Booking - Daniel books Great Hall",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"facilityId\": 4,\n    \"userId\": 4,\n    \"date\": \"2026-03-20\",\n    \"startTime\": \"10:00\",\n    \"endTime\": \"13:00\",\n    \"status\": \"confirmed\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/bookings",
+							"host": ["{{baseUrl}}"],
+							"path": ["bookings"]
+						}
+					}
+				},
+				{
+					"name": "Create Booking - Nathaniel books N Block",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"facilityId\": 5,\n    \"userId\": 1,\n    \"date\": \"2026-03-22\",\n    \"startTime\": \"15:00\",\n    \"endTime\": \"17:00\",\n    \"status\": \"pending\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/bookings",
+							"host": ["{{baseUrl}}"],
+							"path": ["bookings"]
+						}
+					}
+				},
+				{
+					"name": "Get All Bookings",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{baseUrl}}/bookings",
+							"host": ["{{baseUrl}}"],
+							"path": ["bookings"]
+						}
+					}
+				},
+				{
+					"name": "Get Booking by ID",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{baseUrl}}/bookings/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["bookings", "1"]
+						}
+					}
+				},
+				{
+					"name": "Update Booking - Change status to cancelled",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"facilityId\": 1,\n    \"userId\": 1,\n    \"date\": \"2026-03-15\",\n    \"startTime\": \"09:00\",\n    \"endTime\": \"12:00\",\n    \"status\": \"cancelled\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/bookings/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["bookings", "1"]
+						}
+					}
+				},
+				{
+					"name": "Delete Booking",
+					"request": {
+						"method": "DELETE",
+						"url": {
+							"raw": "{{baseUrl}}/bookings/5",
+							"host": ["{{baseUrl}}"],
+							"path": ["bookings", "5"]
+						}
+					}
+				}
+			]
+		}
+	]
+}
