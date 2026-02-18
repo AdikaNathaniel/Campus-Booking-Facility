@@ -169,10 +169,6 @@ class _UsersScreenState extends State<UsersScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Users'),
-        centerTitle: true,
-      ),
       body: FutureBuilder<List<User>>(
         future: _users,
         builder: (context, snapshot) {

@@ -1,13 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:flutter/foundation.dart' show kIsWeb;
 
 class ApiService {
-  static String get baseUrl {
-    // Use localhost for web, 10.0.2.2 for Android emulator
-    if (kIsWeb) return 'http://localhost:3000';
-    return 'http://10.0.2.2:3000';
-  }
+  static const String baseUrl = 'https://campus-booking-facility.onrender.com';
 
   static Future<List<dynamic>> getAll(String endpoint) async {
     final response = await http.get(Uri.parse('$baseUrl/$endpoint'));

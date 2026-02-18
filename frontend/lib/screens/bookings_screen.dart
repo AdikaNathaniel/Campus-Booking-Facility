@@ -34,107 +34,144 @@ class _BookingsScreenState extends State<BookingsScreen> {
         TextEditingController(text: booking?.startTime ?? '');
     final endTimeController =
         TextEditingController(text: booking?.endTime ?? '');
-    final statusController =
-        TextEditingController(text: booking?.status ?? 'confirmed');
+    String selectedStatus = booking?.status ?? 'confirmed';
     final isEditing = booking != null;
 
     showDialog(
       context: context,
-      builder: (ctx) => AlertDialog(
+      builder: (ctx) => Dialog(
         backgroundColor: Colors.white,
-        title: Text(
-          isEditing ? 'Edit Booking' : 'Add Booking',
-          style: const TextStyle(color: Color(0xFF1565C0)),
-        ),
-        content: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                controller: facilityIdController,
-                decoration: const InputDecoration(labelText: 'Facility ID'),
-                keyboardType: TextInputType.number,
-              ),
-              const SizedBox(height: 12),
-              TextField(
-                controller: userIdController,
-                decoration: const InputDecoration(labelText: 'User ID'),
-                keyboardType: TextInputType.number,
-              ),
-              const SizedBox(height: 12),
-              TextField(
-                controller: dateController,
-                decoration:
-                    const InputDecoration(labelText: 'Date (YYYY-MM-DD)'),
-              ),
-              const SizedBox(height: 12),
-              TextField(
-                controller: startTimeController,
-                decoration:
-                    const InputDecoration(labelText: 'Start Time (HH:MM)'),
-              ),
-              const SizedBox(height: 12),
-              TextField(
-                controller: endTimeController,
-                decoration:
-                    const InputDecoration(labelText: 'End Time (HH:MM)'),
-              ),
-              const SizedBox(height: 12),
-              TextField(
-                controller: statusController,
-                decoration: const InputDecoration(
-                    labelText: 'Status (confirmed/pending/cancelled)'),
-              ),
-            ],
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx),
-            child: const Text('Cancel'),
-          ),
-          ElevatedButton(
-            onPressed: () async {
-              final newBooking = Booking(
-                facilityId: int.tryParse(facilityIdController.text) ?? 0,
-                userId: int.tryParse(userIdController.text) ?? 0,
-                date: dateController.text,
-                startTime: startTimeController.text,
-                endTime: endTimeController.text,
-                status: statusController.text,
-              );
-              try {
-                if (isEditing) {
-                  await BookingService.update(booking.id!, newBooking);
-                } else {
-                  await BookingService.create(newBooking);
-                }
-                if (ctx.mounted) Navigator.pop(ctx);
-                _loadBookings();
-                if (mounted) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      backgroundColor: const Color(0xFF1565C0),
-                      content: Text(isEditing
-                          ? 'Booking updated successfully'
-                          : 'Booking created successfully'),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        insetPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 500),
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    isEditing ? 'Edit Booking' : 'Add Booking',
+                    style: const TextStyle(
+                        color: Color(0xFF1565C0),
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 20),
+                  TextField(
+                    controller: facilityIdController,
+                    decoration:
+                        const InputDecoration(labelText: 'Facility ID'),
+                    keyboardType: TextInputType.number,
+                  ),
+                  const SizedBox(height: 12),
+                  TextField(
+                    controller: userIdController,
+                    decoration: const InputDecoration(labelText: 'User ID'),
+                    keyboardType: TextInputType.number,
+                  ),
+                  const SizedBox(height: 12),
+                  TextField(
+                    controller: dateController,
+                    decoration: const InputDecoration(
+                        labelText: 'Date (YYYY-MM-DD)'),
+                  ),
+                  const SizedBox(height: 12),
+                  TextField(
+                    controller: startTimeController,
+                    decoration: const InputDecoration(
+                        labelText: 'Start Time (HH:MM)'),
+                  ),
+                  const SizedBox(height: 12),
+                  TextField(
+                    controller: endTimeController,
+                    decoration: const InputDecoration(
+                        labelText: 'End Time (HH:MM)'),
+                  ),
+                  const SizedBox(height: 12),
+                  StatefulBuilder(
+                    builder: (context, setDialogState) =>
+                        DropdownButtonFormField<String>(
+                      initialValue: selectedStatus,
+                      decoration:
+                          const InputDecoration(labelText: 'Status'),
+                      items: const [
+                        DropdownMenuItem(
+                            value: 'confirmed', child: Text('Confirmed')),
+                        DropdownMenuItem(
+                            value: 'pending', child: Text('Pending')),
+                        DropdownMenuItem(
+                            value: 'cancelled', child: Text('Cancelled')),
+                      ],
+                      onChanged: (value) {
+                        if (value != null) {
+                          setDialogState(() => selectedStatus = value);
+                        }
+                      },
                     ),
-                  );
-                }
-              } catch (e) {
-                if (ctx.mounted) {
-                  ScaffoldMessenger.of(ctx).showSnackBar(
-                    SnackBar(
-                      backgroundColor: Colors.red,
-                      content: Text('Error: $e'),
-                    ),
-                  );
-                }
-              }
-            },
-            child: Text(isEditing ? 'Update' : 'Add'),
+                  ),
+                  const SizedBox(height: 24),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(ctx),
+                        child: const Text('Cancel'),
+                      ),
+                      const SizedBox(width: 8),
+                      ElevatedButton(
+                        onPressed: () async {
+                          final newBooking = Booking(
+                            facilityId:
+                                int.tryParse(facilityIdController.text) ?? 0,
+                            userId:
+                                int.tryParse(userIdController.text) ?? 0,
+                            date: dateController.text,
+                            startTime: startTimeController.text,
+                            endTime: endTimeController.text,
+                            status: selectedStatus,
+                          );
+                          try {
+                            if (isEditing) {
+                              await BookingService.update(
+                                  booking.id!, newBooking);
+                            } else {
+                              await BookingService.create(newBooking);
+                            }
+                            if (ctx.mounted) Navigator.pop(ctx);
+                            _loadBookings();
+                            if (mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  backgroundColor: const Color(0xFF1565C0),
+                                  content: Text(isEditing
+                                      ? 'Booking updated successfully'
+                                      : 'Booking created successfully'),
+                                ),
+                              );
+                            }
+                          } catch (e) {
+                            if (ctx.mounted) {
+                              ScaffoldMessenger.of(ctx).showSnackBar(
+                                SnackBar(
+                                  backgroundColor: Colors.red,
+                                  content: Text('Error: $e'),
+                                ),
+                              );
+                            }
+                          }
+                        },
+                        child: Text(isEditing ? 'Update' : 'Add'),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ),
-        ],
+        ),
       ),
     );
   }
@@ -202,10 +239,6 @@ class _BookingsScreenState extends State<BookingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Bookings'),
-        centerTitle: true,
-      ),
       body: FutureBuilder<List<Booking>>(
         future: _bookings,
         builder: (context, snapshot) {

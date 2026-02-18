@@ -157,10 +157,6 @@ class _FacilitiesScreenState extends State<FacilitiesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Facilities'),
-        centerTitle: true,
-      ),
       body: FutureBuilder<List<Facility>>(
         future: _facilities,
         builder: (context, snapshot) {
@@ -214,7 +210,15 @@ class _FacilitiesScreenState extends State<FacilitiesScreen> {
                   ),
                   title: Text(f.name,
                       style: const TextStyle(fontWeight: FontWeight.bold)),
-                  subtitle: Text('${f.location}\nCapacity: ${f.capacity}'),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(f.location,
+                          overflow: TextOverflow.ellipsis, maxLines: 1),
+                      Text('Capacity: ${f.capacity}',
+                          overflow: TextOverflow.ellipsis, maxLines: 1),
+                    ],
+                  ),
                   isThreeLine: true,
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
